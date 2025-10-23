@@ -199,13 +199,8 @@ label {
     margin-bottom: 10px;
 }
 
-/* Card flip for hover on desktop, active for mobile */
-#card:hover .card-face, #card:active .card-face {
-     transform: rotateY(180deg);
-}
-#card:hover .card-back, #card:active .card-back {
-     transform: rotateY(0deg);
-}
+/* --- Card Flipping Logic --- */
+/* DELETED the conflicting #card:hover and #card:active rules that were here */
 
 #card.is-flipped .card-front {
     transform: rotateY(-180deg);
@@ -214,6 +209,7 @@ label {
     transform: rotateY(0deg);
 }
 
+/* --- Reveal Imposter Button & Result --- */
 .reveal-btn {
     width: 100%;
     padding: 18px;
@@ -221,13 +217,12 @@ label {
     font-size: 1.1rem;
     cursor: pointer;
     border: none;
-    margin-bottom: 20px; /* Give it space from the elements below */
+    margin-bottom: 20px;
     transition: transform 0.2s;
-    /* User requested styles */
-    background-color: #28a745; /* Vibrant Green */
-    color: #dc3545;            /* Strong Red */
+    background-color: #28a745;
+    color: #dc3545;
     font-weight: 700;
-    border: 2px solid #dc3545; /* Red border for accent */
+    border: 2px solid #dc3545;
 }
 
 .reveal-btn:hover {
@@ -242,35 +237,31 @@ label {
     width: 100%;
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--primary-accent); /* Use the theme's accent color for the text */
+    color: var(--primary-accent);
 }
 
-/* This is the most important part for showing/hiding */
 #imposter-reveal-result.hidden {
     display: none;
 }
 
 /* --- Toggle Switch Styling --- */
-
 .toggle-switch-container {
     display: flex;
-    justify-content: space-between; /* Aligns "Enable Hints" and the switch */
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     background-color: var(--secondary-accent);
     padding: 15px;
     border-radius: 8px;
     margin-top: 15px;
-    margin-bottom: 5px; /* Adds space before the Start button */
+    margin-bottom: 5px;
 }
 
-/* This targets the "Enable Hints" text */
 .toggle-switch-container label {
     margin-bottom: 0;
     font-weight: 600;
 }
 
-/* The switch - the box around the slider */
 .switch {
     position: relative;
     display: inline-block;
@@ -278,14 +269,12 @@ label {
     height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider bar */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -293,11 +282,10 @@ label {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #333; /* Darker grey when off */
+    background-color: #333;
     transition: .4s;
 }
 
-/* The sliding circle */
 .slider:before {
     position: absolute;
     content: "";
@@ -309,16 +297,14 @@ label {
     transition: .4s;
 }
 
-/* Styles for when the toggle is checked ON */
 input:checked + .slider {
-    background-color: var(--primary-accent); /* Use theme color for ON state */
+    background-color: var(--primary-accent);
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px); /* Moves the circle to the right */
+    transform: translateX(26px);
 }
 
-/* Rounded corners for the slider and bar */
 .slider.round {
     border-radius: 34px;
 }
@@ -328,9 +314,8 @@ input:checked + .slider:before {
 }
 
 /* --- Error Message Styling --- */
-
 .error-message {
-    color: #e94560; /* Use the vibrant accent color for errors */
+    color: #e94560;
     font-weight: 600;
     margin-top: 15px;
     width: 100%;
@@ -341,6 +326,4 @@ input:checked + .slider:before {
 
 .error-message.hidden {
     opacity: 0;
-    /* We use opacity instead of display:none so it still takes up space,
-       preventing other elements from jumping around when it appears/disappears. */
 }

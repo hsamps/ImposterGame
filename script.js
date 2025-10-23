@@ -4,6 +4,8 @@ const card = document.getElementById('card');
 const imposterRevealResult = document.getElementById('imposter-reveal-result');
 const revealButton = document.querySelector('.reveal-btn');
 const errorMessage = document.getElementById('error-message');
+// NEW: Get a direct reference to the "Next Player" button
+const nextPlayerBtn = document.getElementById('next-player-btn');
 
 
 // --- Game State Variables ---
@@ -82,7 +84,6 @@ function startGame() {
 }
 
 // --- Role Assignment ---
-// MODIFIED to include partner names for imposters
 function assignRolesAndStart() {
     const randomIndex = Math.floor(Math.random() * wordData.length);
     const { word, hint } = wordData[randomIndex];
@@ -97,7 +98,6 @@ function assignRolesAndStart() {
                 ? `Hint: ${hint}` 
                 : 'Figure out the secret word!';
             
-            // NEW LOGIC: If there is more than one imposter, add the partners' names.
             if (imposters.length > 1) {
                 const otherImposters = imposters.filter(name => name !== player);
                 imposterInfo += `<br><br>Your partners: ${otherImposters.join(', ')}`;
@@ -115,21 +115,42 @@ function assignRolesAndStart() {
 
 
 // --- Card Reveal Phase ---
-// MODIFIED to correctly render the partner list
+// MODIFIED: This function contains the new "tap to toggle" logic.
 function displayCurrentCard() {
+    // Ensure the card is always face-down to start.
     card.classList.remove('is-flipped'); 
     
+    // HIDE the "Next Player" button for every new player.
+    nextPlayerBtn.style.display = 'none';
+
+    // This variable tracks if the current player has actually looked at their role.
+    let playerHasViewedCard = false;
+
+    // Set the card content after a short delay to allow the flip-back animation to finish smoothly.
     setTimeout(() => {
         const currentPlayer = assignedRoles[currentPlayerIndex];
         document.getElementById('player-name-on-card').textContent = currentPlayer.name;
         document.getElementById('role-text').textContent = currentPlayer.role;
-        // IMPORTANT: Use .innerHTML to render the <br> tags for the partner list.
         document.getElementById('role-info').innerHTML = currentPlayer.info;
     }, 200);
 
-    card.onpointerdown = () => card.classList.add('is-flipped');
-    card.onpointerup = () => card.classList.remove('is-flipped');
-    card.onpointerleave = () => card.classList.remove('is-flipped');
+    // REMOVED the old onpointerdown/onpointerup handlers.
+    // ADDED a new, single onclick handler for the toggle logic.
+    card.onclick = function() {
+        // Toggle the flip animation.
+        card.classList.toggle('is-flipped');
+
+        // Check if the card is now face-up (meaning the player is viewing their role).
+        if (card.classList.contains('is-flipped')) {
+            playerHasViewedCard = true; // Mark that they have seen it.
+        }
+
+        // Check if the card is now face-down AND if the player has previously viewed it.
+        if (!card.classList.contains('is-flipped') && playerHasViewedCard) {
+            // If both are true, they have completed the cycle. Show the button.
+            nextPlayerBtn.style.display = 'block';
+        }
+    };
 }
 
 
@@ -138,6 +159,8 @@ function nextPlayer() {
     if (currentPlayerIndex < assignedRoles.length) {
         displayCurrentCard();
     } else {
+        // Since the card's onclick is specific to the reveal screen, we clear it here to prevent any potential issues.
+        card.onclick = null;
         showScreen('end-screen');
     }
 }

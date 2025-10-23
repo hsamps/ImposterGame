@@ -25,7 +25,6 @@
             <label for="imposter-count-input">Number of Imposters</label>
             <input type="number" id="imposter-count-input" value="1" min="1">
             
-            <!-- NEW: Toggle Switch for Hints -->
             <div class="toggle-switch-container">
                 <label for="hints-toggle">Enable Hints for Imposter</label>
                 <label class="switch">
@@ -36,7 +35,6 @@
             
             <button class="primary-btn" onclick="startGame()">Start Game</button>
 
-            <!-- NEW: An element to display validation errors -->
             <p id="error-message" class="error-message hidden"></p>
         </div>
     </div>
@@ -48,7 +46,8 @@
             <div id="card" ontouchstart="">
                 <div class="card-face card-front">
                     <p id="player-name-on-card">Player's Name</p>
-                    <small>Tap and hold to reveal your role</small>
+                    <!-- THIS LINE IS UPDATED -->
+                    <small>Tap to reveal your role</small>
                 </div>
                 <div class="card-face card-back">
                     <p id="role-text"></p>
@@ -64,9 +63,7 @@
         <div class="container">
             <h1>Game Over!</h1>
             
-            <!-- NEW: The button to reveal the imposter -->
             <button class="reveal-btn" onclick="revealImposter()">Reveal Imposter</button>
-            <!-- NEW: A hidden div to show the result -->
             <div id="imposter-reveal-result" class="hidden"></div>
 
             <p>Everyone has received their roles. <br>Start discussing!</p>
