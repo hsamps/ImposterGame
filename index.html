@@ -43,10 +43,10 @@
     <div id="reveal-screen" class="screen">
         <div class="container">
             <p class="reveal-header">Pass the phone to...</p>
-            <div id="card" ontouchstart="">
+            <!-- THIS LINE IS THE ONLY CHANGE. I have removed ontouchstart="" -->
+            <div id="card">
                 <div class="card-face card-front">
                     <p id="player-name-on-card">Player's Name</p>
-                    <!-- THIS LINE IS UPDATED -->
                     <small>Tap to reveal your role</small>
                 </div>
                 <div class="card-face card-back">
