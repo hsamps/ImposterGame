@@ -1,6 +1,6 @@
 /* --- Global Reset & Root Variables --- */
 :root {
-    --bg-color: white; /* Dark Blue/Purple #1a1a2e */
+    --bg-color: #1a1a2e; /* Dark Blue/Purple  */
     --card-color: #16213e;
     --primary-accent: #e94560; /* Vibrant Pink/Red */
     --secondary-accent: #0f3460;
