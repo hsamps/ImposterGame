@@ -1,0 +1,346 @@
+/* --- Global Reset & Root Variables --- */
+:root {
+    --bg-color: #1a1a2e; /* Dark Blue/Purple */
+    --card-color: #16213e;
+    --primary-accent: #e94560; /* Vibrant Pink/Red */
+    --secondary-accent: #0f3460;
+    --text-color: #f0f0f0;
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden; /* Prevents bouncing on mobile */
+}
+
+/* --- Screen & Container Layout --- */
+.screen {
+    display: none; /* Hide all screens by default */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.screen.active {
+    display: block; /* Show the active screen */
+    opacity: 1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+}
+
+h1 {
+    color: var(--primary-accent);
+    margin-bottom: 25px;
+}
+
+/* --- Input & Button Styling --- */
+input[type="text"], input[type="number"] {
+    background: var(--secondary-accent);
+    border: 2px solid var(--secondary-accent);
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    font-family: var(--font-family);
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+}
+
+.input-group {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.input-group input { margin: 0; }
+.input-group button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: var(--primary-accent);
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.primary-btn, .secondary-btn {
+    width: 100%;
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    margin-top: 15px;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.primary-btn {
+    background-color: var(--primary-accent);
+    color: var(--text-color);
+}
+.secondary-btn {
+    background-color: var(--secondary-accent);
+    color: var(--text-color);
+}
+.primary-btn:hover, .secondary-btn:hover {
+    transform: translateY(-3px);
+}
+
+
+/* --- Player List --- */
+#player-list {
+    list-style-type: none;
+    width: 100%;
+    margin-bottom: 20px;
+    max-height: 20vh;
+    overflow-y: auto;
+}
+
+#player-list li {
+    background: var(--secondary-accent);
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+
+/* --- Card Design --- */
+.reveal-header {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+#card {
+    width: 90vw;
+    max-width: 320px;
+    height: 60vh;
+    max-height: 450px;
+    perspective: 1000px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backface-visibility: hidden;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.card-front {
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    border: 2px solid #e94560;
+}
+
+.card-front p {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.card-front small {
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: var(--secondary-accent);
+}
+.card-back p {
+    font-size: 1.2rem;
+}
+#role-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-accent);
+    margin-bottom: 10px;
+}
+
+/* Card flip for hover on desktop, active for mobile */
+#card:hover .card-face, #card:active .card-face {
+     transform: rotateY(180deg);
+}
+#card:hover .card-back, #card:active .card-back {
+     transform: rotateY(0deg);
+}
+
+#card.is-flipped .card-front {
+    transform: rotateY(-180deg);
+}
+#card.is-flipped .card-back {
+    transform: rotateY(0deg);
+}
+
+.reveal-btn {
+    width: 100%;
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 20px; /* Give it space from the elements below */
+    transition: transform 0.2s;
+    /* User requested styles */
+    background-color: #28a745; /* Vibrant Green */
+    color: #dc3545;            /* Strong Red */
+    font-weight: 700;
+    border: 2px solid #dc3545; /* Red border for accent */
+}
+
+.reveal-btn:hover {
+    transform: translateY(-3px);
+}
+
+#imposter-reveal-result {
+    background: var(--secondary-accent);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-accent); /* Use the theme's accent color for the text */
+}
+
+/* This is the most important part for showing/hiding */
+#imposter-reveal-result.hidden {
+    display: none;
+}
+
+/* --- Toggle Switch Styling --- */
+
+.toggle-switch-container {
+    display: flex;
+    justify-content: space-between; /* Aligns "Enable Hints" and the switch */
+    align-items: center;
+    width: 100%;
+    background-color: var(--secondary-accent);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 5px; /* Adds space before the Start button */
+}
+
+/* This targets the "Enable Hints" text */
+.toggle-switch-container label {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider bar */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333; /* Darker grey when off */
+    transition: .4s;
+}
+
+/* The sliding circle */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+/* Styles for when the toggle is checked ON */
+input:checked + .slider {
+    background-color: var(--primary-accent); /* Use theme color for ON state */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px); /* Moves the circle to the right */
+}
+
+/* Rounded corners for the slider and bar */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* --- Error Message Styling --- */
+
+.error-message {
+    color: #e94560; /* Use the vibrant accent color for errors */
+    font-weight: 600;
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.error-message.hidden {
+    opacity: 0;
+    /* We use opacity instead of display:none so it still takes up space,
+       preventing other elements from jumping around when it appears/disappears. */
+}
