@@ -12,38 +12,41 @@
 </head>
 <body>
 
-    <!-- MERGED SETUP SCREEN: Now contains Topic Selection and Player Setup -->
+    <!-- MERGED SETUP SCREEN with new Dropdown -->
     <div id="setup-screen" class="screen active">
         <div class="container">
             <h1>Create Game</h1>
 
-            <!-- Topic Selection is now here -->
+            <!-- NEW Dropdown Structure for Topic Selection -->
             <h2>Choose Topics</h2>
-            <div id="topic-options">
-                <div class="topic-option">
-                    <input type="checkbox" id="topic-everyday" class="topic-checkbox" value="everyday_life.json">
-                    <label for="topic-everyday">Everyday Life</label>
-                </div>
-                <div class="topic-option">
-                    <input type="checkbox" id="topic-pop" class="topic-checkbox" value="pop_culture.json">
-                    <label for="topic-pop">Pop Culture</label>
-                </div>
-                <div class="topic-option">
-                    <input type="checkbox" id="topic-foodie" class="topic-checkbox" value="foodie_deck.json">
-                    <label for="topic-foodie">Foods</label>
-                </div>
-                <div class="topic-option">
-                    <input type="checkbox" id="topic-classic" class="topic-checkbox" value="words.json">
-                    <label for="topic-classic">Classic Mix</label>
-                </div>
-                <hr>
-                <div class="topic-option">
-                    <input type="checkbox" id="topic-all" onchange="toggleAllTopics(this)">
-                    <label for="topic-all">Select All</label>
+            <div class="dropdown">
+                <button onclick="toggleDropdown()" class="dropdown-btn" id="dropdown-btn-text">Select Topics</button>
+                <div id="topic-dropdown-content" class="dropdown-content">
+                    <div class="topic-option">
+                        <input type="checkbox" id="topic-everyday" class="topic-checkbox" value="everyday_life.json">
+                        <label for="topic-everyday">Everyday Life</label>
+                    </div>
+                    <div class="topic-option">
+                        <input type="checkbox" id="topic-pop" class="topic-checkbox" value="pop_culture.json">
+                        <label for="topic-pop">Pop Culture</label>
+                    </div>
+                    <div class="topic-option">
+                        <input type="checkbox" id="topic-foodie" class="topic-checkbox" value="foodie_deck.json">
+                        <label for="topic-foodie">Foods</label>
+                    </div>
+                    <div class="topic-option">
+                        <input type="checkbox" id="topic-classic" class="topic-checkbox" value="words.json">
+                        <label for="topic-classic">Classic Mix</label>
+                    </div>
+                    <hr>
+                    <div class="topic-option">
+                        <input type="checkbox" id="topic-all" onchange="toggleAllTopics(this)">
+                        <label for="topic-all">Select All</label>
+                    </div>
                 </div>
             </div>
 
-            <!-- Player Setup is below -->
+            <!-- Player Setup (Unchanged) -->
             <h2>Add Players</h2>
             <div class="input-group">
                 <input type="text" id="player-name-input" placeholder="Enter player name">
@@ -61,7 +64,6 @@
             </div>
             
             <button class="primary-btn" onclick="startGame()">Start Game</button>
-            <!-- This single error message will handle all errors now -->
             <p id="error-message" class="error-message hidden"></p>
         </div>
     </div>

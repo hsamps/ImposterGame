@@ -340,34 +340,70 @@ input:checked + .slider:before {
     opacity: 0;
 }
 
-/* --- Topic Selection Styling --- */
-#topic-options {
+/* --- NEW: Dropdown Menu Styling --- */
+
+.dropdown {
+    position: relative; /* Crucial for positioning the dropdown content */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dropdown-btn {
     width: 100%;
     background-color: var(--secondary-accent);
+    color: var(--text-color);
+    padding: 15px;
+    font-size: 1rem;
+    font-family: var(--font-family);
+    border: 2px solid var(--secondary-accent);
     border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 15px;
-    text-align: left;
+    text-align: left; /* Aligns text to the left like a real input */
+    cursor: pointer;
+    transition: border-color 0.3s;
 }
+
+.dropdown-btn:hover, .dropdown-btn:focus {
+    border-color: var(--primary-accent);
+    outline: none;
+}
+
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: var(--secondary-accent);
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 1; /* Ensures it appears on top of other content */
+    margin-top: 5px;
+    padding: 10px;
+}
+
+/* This class is added by JavaScript to show the dropdown */
+.dropdown-content.show {
+    display: block;
+}
+
+/* --- (The rest of the topic selection styling remains the same) --- */
 
 .topic-option {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    padding: 5px;
 }
 
 .topic-option:last-child {
     margin-bottom: 0;
 }
 
-#topic-options hr {
+#topic-dropdown-content hr {
     border: none;
     height: 1px;
     background-color: var(--bg-color);
     margin: 15px 0;
 }
 
-/* Custom Checkbox Styling */
 .topic-option input[type="checkbox"] {
     opacity: 0;
     width: 0;
