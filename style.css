@@ -134,21 +134,42 @@ label {
 }
 
 
-/* --- Player List --- */
+/* --- Player List (MODIFIED) --- */
 #player-list {
     list-style-type: none;
     width: 100%;
     margin-bottom: 20px;
-    max-height: 20vh;
+    max-height: 25vh; 
     overflow-y: auto;
 }
 
+
 #player-list li {
     background: var(--secondary-accent);
-    padding: 12px;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border-radius: 8px;
     margin-bottom: 8px;
     font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.remove-player-btn {
+    background-color: var(--primary-accent);
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50%; /* Makes it a circle */
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    line-height: 28px; /* Helps center the minus sign */
+    text-align: center;
+    flex-shrink: 0; /* Prevents the button from shrinking */
+    margin-left: 10px;
 }
 
 
